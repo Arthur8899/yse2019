@@ -12,23 +12,42 @@
 	ログインしてください：ログインしていない状態で他のページに遷移した場合(ログイン画面に遷移し上記を表示)
 */
 //⑥セッションを開始する
-
+session_start();
 //①名前とパスワードを入れる変数を初期化する
-
+$db['dbname'] = "loginManagement"; 
+$db['host'] = "localhost";
+$db['name'] = "name";
+$db['pass'] = "password";
 /*
  * ②ログインボタンが押されたかを判定する。
  * 押されていた場合はif文の中の処理を行う
  */
-if (/* ②の処理を書く */ ) {
+ /* ②の処理を書く */ 
+if (isset($_PAST["login"]) {
+	if (empty($_POST["userid"])) {  // emptyは値が空のとき
+        $errorMessage = 'ユーザーIDが未入力です。';
+    } else if (empty($_POST["password"])) {
+        $errorMessage = 'パスワードが未入力です。';
+    }
+
+    if (!empty($_POST["userid"]) && !empty($_POST["password"])) {
+        // 入力したユーザIDを格納
+        $userid = $_POST["userid"];
+
 	/*
 	 * ③名前とパスワードが両方とも入力されているかを判定する。
 	 * 入力されていた場合はif文の中の処理を行う。
 	 */
-	if (/* ③の処理を書く */) {
+	         $dsn = sprintf('mysql: host=%s; dbname=%s; charset=utf8', $db['host'], $db['dbname']);
+		(/* ③の処理を書く */)
 		//④名前とパスワードにPOSTで送られてきた名前とパスワードを設定する
-	} else {
 		//⑤名前かパスワードが入力されていない場合は、「名前かパスワードが未入力です」という文言をメッセージを入れる変数に設定する
-	}
+	if (empty($_POST["name"])) {  // emptyは値が空のとき
+        $errorMessage = '名前が未入力です。';
+    } else if (empty($_POST["password"])) {
+        $errorMessage = 'パスワードが未入力です。';
+    }
+
 }
 
 //⑦名前が入力されているか判定する。入力されていた場合はif文の中に入る
@@ -36,10 +55,14 @@ if (/* ⑦の処理を書く */) {
 	//⑧名前に「yse」、パスワードに「2019」と設定されているか確認する。設定されていた場合はif文の中に入る
 	if (/* ⑧の処理を書く */){
 		//⑨SESSIONに名前を設定し、SESSIONの「login」フラグをtrueにする
+		$_SESSION["NAME"] = $row['name'];
 		//⑩在庫一覧画面へ遷移する
-		header(/* ⑩の遷移先を書く */);
+		/* ⑩の遷移先を書く */
+		header（"Location: zaiko_ichiran.php");
+		
 	}else{
 		//⑪名前もしくはパスワードが間違っていた場合は、「ユーザー名かパスワードが間違っています」という文言をメッセージを入れる変数に設定する
+		$errorMessage = 'ユーザーIDあるいはパスワードに誤りがあります。';
 	}
 }
 
